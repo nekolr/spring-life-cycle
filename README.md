@@ -1,2 +1,2 @@
-# spring-life-cycle
-Life is short , why use spring?!
+# Spring bean生命周期图
+![Spring bean生命周期](https://github.com/nekolr/spring-life-cycle/blob/master/lro.png)
