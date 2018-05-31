@@ -3,10 +3,11 @@ package com.nekolr;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomBeanPostProcessor implements org.springframework.beans.factory.config.BeanPostProcessor {
+public class CustomBeanPostProcessor implements org.springframework.beans.factory.config.BeanPostProcessor, Ordered {
 
     private Logger logger = LoggerFactory.getLogger(CustomBeanPostProcessor.class.getName());
 
@@ -24,5 +25,10 @@ public class CustomBeanPostProcessor implements org.springframework.beans.factor
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         logger.info("调用BeanPostProcessor.postProcessAfterInitialization() beanName: " + beanName);
         return bean;
+    }
+
+    @Override
+    public int getOrder() {
+        return 2334;
     }
 }

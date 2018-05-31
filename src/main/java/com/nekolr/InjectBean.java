@@ -3,8 +3,10 @@ package com.nekolr;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
-public class InjectBean implements BeanFactoryAware, BeanNameAware, InitializingBean, DisposableBean {
+public class InjectBean implements BeanFactoryAware, BeanNameAware, InitializingBean, DisposableBean, ApplicationContextAware {
 
     private org.slf4j.Logger logger = LoggerFactory.getLogger(InjectBean.class.getName());
 
@@ -13,6 +15,8 @@ public class InjectBean implements BeanFactoryAware, BeanNameAware, Initializing
     private BeanFactory beanFactory;
 
     private String beanName;
+
+    private ApplicationContext applicationContext;
 
     public InjectBean() {
         logger.info("调用InjectBean的无参构造器实例化");
@@ -61,6 +65,12 @@ public class InjectBean implements BeanFactoryAware, BeanNameAware, Initializing
      */
     public void customDestroy() {
         logger.info("调用<bean>的destroy-method属性指定的销毁方法");
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        logger.info("调用ApplicationContextAware.setApplicationContext()");
+        this.applicationContext = applicationContext;
     }
 
     @Override

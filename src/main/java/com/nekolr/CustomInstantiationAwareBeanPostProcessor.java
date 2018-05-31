@@ -5,12 +5,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyValues;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;
+import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 
 import java.beans.PropertyDescriptor;
 
 @Component
-public class CustomInstantiationAwareBeanPostProcessor extends InstantiationAwareBeanPostProcessorAdapter {
+public class CustomInstantiationAwareBeanPostProcessor extends InstantiationAwareBeanPostProcessorAdapter implements Ordered {
 
     private Logger logger = LoggerFactory.getLogger(CustomInstantiationAwareBeanPostProcessor.class.getName());
 
@@ -48,5 +49,10 @@ public class CustomInstantiationAwareBeanPostProcessor extends InstantiationAwar
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         logger.info("调用InstantiationAwareBeanPostProcessor.postProcessAfterInitialization() beanName: " + beanName);
         return bean;
+    }
+
+    @Override
+    public int getOrder() {
+        return 2333;
     }
 }
